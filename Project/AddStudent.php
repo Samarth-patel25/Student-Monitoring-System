@@ -1,0 +1,60 @@
+<?php
+require_once "config.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $student_id = $_POST["student_id"];
+
+    if (!preg_match("/^[a-zA-Z ]+$/", $name)) {
+        echo "<h3 style='color: red;'>Error: Name must only contain letters and spaces.</h3>";
+    }elseif (strlen($name) > 30){
+            echo "<h3 style='color: red;'>Error: name must be smaller than 30 characters.</h3>";
+    } elseif (strlen($password) < 4) {
+        echo "<h3 style='color: red;'>Error: Password must be greater than 4 characters.</h3>";
+    } else {
+        $sql = "INSERT INTO students (name, email, password, student_id) VALUES (?, ?, ?, ?)";
+
+        if ($stmt = mysqli_prepare($link, $sql)) {
+            mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $password, $student_id);
+
+            if (mysqli_stmt_execute($stmt)) {
+                echo "<h3 style='color: green;'>Student's Data Added Successfully!</h3>";
+            } else {
+                echo "<h3 style='color: red;'>Error: Could not Add Student's Data.</h3>";
+            }
+
+            mysqli_stmt_close($stmt);
+        }
+        mysqli_close($link);
+    }
+}
+?>
+
+
+<link rel="stylesheet" href="style.css">
+
+<div class="container">
+
+    <h1>Add Student's Data</h1>
+    
+    <form method="post">
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Password:</label><br>
+        <input type="text" name="password" required><br><br>
+
+        <label>Student's ID (e.g., 24CEUOZ105):</label><br>
+        <input type="text" name="student_id" required><br><br>
+        
+        <div class="action">
+            <input type="submit" value="Add Student" id="add">
+            <a href=index.php id="back">Back</a>
+        </div>
+    </form>
+</div>
