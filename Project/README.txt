@@ -33,7 +33,7 @@ How to Run
 ----------
 
 1. Clone the Repository:
-   git clone https://github.com/MANAN-8017/Student-Monitoring-System.git
+   git clone git clone https://github.com/Samarth-patel25/Student-Monitoring-System.git
 
 2. Import the Database:
    - Open phpMyAdmin
