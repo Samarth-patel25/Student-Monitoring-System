@@ -94,7 +94,7 @@ Project/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/<your-username>/Student-Monitoring-System.git
+   git clone https://github.com/Samarth-patel25/Student-Monitoring-System.git
    ```
 
 2. **Move the project into your server's document root**
